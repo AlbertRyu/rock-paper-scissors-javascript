@@ -3,3 +3,19 @@
     flex-direction: column;
     align-items: center;
 }
+
+.choices{
+    display: flex;
+    gap: 10px;
+}
+
+.humanChoice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 50px;
+}
+
+.resultSection {
+    text-align: center;
+}

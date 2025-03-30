@@ -7,11 +7,26 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <script src="script.js"></script>
+    
     <div class="header">
         <h1>Rock Paper Scissors</h1>
-        <p>console game</p>
-        <p>please play it in the web dev console.</p>
+        <span>This is no long a console game!<em>Now it has a UI.</em></span>
     </div>
+    <div class="humanChoice">
+        <p>Player Human, Make your choice:</p>
+        <div class="choices">
+            <button class="choice">Rock</button>
+            <button class="choice">Paper</button>
+            <button class="choice">Scissors</button>
+        </div>
+    </div>
+    <hr>
+    <div class="resultSection">
+        <h4>Result Section</h4> 
+        <span class="matchResult">The match has not started.</span>
+        <p class="currentScore"></p>
+        <p class="finalMessage"></p>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
