@@ -1,5 +1,20 @@
 console.log("Welcome, Player!")
 
+let computerScore, humanScore, humanChoice, computerChoice
+const buttons = document.querySelectorAll('.choice')
+
+// Add listener to buttons, waiting for player's choice.
+function startGame(){
+    console.log('Game Start!')
+    computerScore = 0
+    humanScore = 0
+    buttons.forEach(
+        button => button.addEventListener('click', humanMadeAChoice)
+    )
+}
+
+
+
 function getComputerChoice() {
     let random_number = Math.random()
     if (random_number < 0.33) {
@@ -10,14 +25,6 @@ function getComputerChoice() {
         return "Paper"
     }
 }
-
-function takeCareFormate(choice){
-    // This function takes care about the format.
-    return choice[0].toUpperCase() + choice.slice(1).toLowerCase()
-}
-
-let humanScore = 0
-let computerScore = 0
 
 function playRound(humanChoice, computerChoice){
     
@@ -54,7 +61,7 @@ function playRound(humanChoice, computerChoice){
     const currentScore = document.querySelector('.currentScore')
     scoreText = `
         After this match, the score is <br>
-        Computer: ${computerScore}
+        Computer: ${computerScore} <br>
         Player:   ${humanScore}`
 
     matchResult.textContent = resultText
@@ -62,22 +69,40 @@ function playRound(humanChoice, computerChoice){
 
 }
 
-let humanChoice, computerChoice, highestScore
-highestScore = 0
-const buttons = document.querySelectorAll('.choice')
-buttons.forEach(
-    button => button.addEventListener('click', (e) => humanMadeAChoice(e.target.textContent))
-)
-function humanMadeAChoice(humanChoice){
+
+// When Human player made a choice, play a round.
+function humanMadeAChoice(event){
     computerChoice = getComputerChoice()
+    humanChoice = event.target.textContent
     playRound(humanChoice, computerChoice)
-    highestScore = Math.max(humanScore,computerScore)
-    let status;
     if (humanScore == 5) {
-        document.querySelector('.finalMessage').innerHTML = `You win the whole game!`
+        document.querySelector('.finalMessage').innerHTML = `Game is over. You win!`
+        endGame()
     }else if (computerScore == 5) {
-        document.querySelector('.finalMessage').innerHTML = `You lose the whole game!`
+        document.querySelector('.finalMessage').innerHTML = `Game is over. You lose!`
+        endGame()
     }
 }
 
-//playGame()
+
+// Add the restart button into the dom and remove Listener from choice buttons.
+function endGame(){
+    buttons.forEach(
+        button => button.removeEventListener('click',humanMadeAChoice)
+    )
+    let restartButton = document.createElement('button')
+    restartButton.classList = 'restartButton'
+    restartButton.textContent = 'Play Again?'
+    restartButton.addEventListener('click', restartGame)
+
+    let resultSection = document.querySelector('.resultSection')
+    resultSection.appendChild(restartButton)
+    
+}
+
+//start the Game, restore the original webpage 
+function restartGame(){
+    location.reload()
+}
+
+startGame()

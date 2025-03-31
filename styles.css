@@ -19,3 +19,8 @@
 .resultSection {
     text-align: center;
 }
+
+.finalMessage {
+    font-size: large;
+    font-weight: bold;
+}
